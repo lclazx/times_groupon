@@ -9,6 +9,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+// using Swashbuckle.AspNetCore.Swagger;
+using NJsonSchema;
+using NSwag.AspNetCore;
 
 namespace times_groupon
 {
@@ -33,6 +36,8 @@ namespace times_groupon
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            // services.AddSwaggerGen(c => { c.SwaggerDoc("v2", new Info { Title = "Times Groupon", Version = "v2" }); });
+            services.AddSwaggerDocument();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,9 +54,13 @@ namespace times_groupon
                 app.UseHsts();
             }
 
+
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseSwagger();
+            app.UseSwaggerUi3();
 
             app.UseMvc(routes =>
             {
@@ -59,6 +68,12 @@ namespace times_groupon
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+            // app.UseSwagger();
+            // app.UseSwaggerUI(c =>
+            // {
+            //     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Times Groupon V2");
+            // });
+
         }
     }
 }

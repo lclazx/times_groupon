@@ -21,7 +21,7 @@ namespace Test
         }
 
         [TestMethod]
-        public void TestInserUser()
+        public void TestInsertUser()
         {
             var service = new ActivityService("mongodb://localhost:27017");
             var previousCount = service.Users.CountDocuments(x => true);
